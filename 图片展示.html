@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			div {
+				width: 670px;
+				margin-left: 50%;
+				transform: translate(-50%);
+			}
+
+			ul {
+				width: 670px;
+				display: flex;
+				list-style: none;
+				justify-content: space-between;
+			}
+
+			ul>li>img {
+				width: 120px;
+				vertical-align: bottom;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="images/ad1.jpg">
+			<ul>
+				<li><img src="images/ad1.jpg"></li>
+				<li><img src="images/ad2.jpg"></li>
+				<li><img src="images/ad3.jpg"></li>
+				<li><img src="images/ad4.jpg"></li>
+				<li><img src="images/ad5.jpg"></li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			let zImg = document.querySelectorAll("li>img");
+			let showImg = document.querySelector("img");
+			for (let item of zImg) {
+				item.onclick = change;
+			}
+			function change()
+			{
+				showImg.src = this.src;
+			}
+		</script>
+	</body>
+</html>

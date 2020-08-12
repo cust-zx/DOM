@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+
+			.five {
+				width: 500px;
+				height: 20px;
+				background: blue;
+			}
+
+			.two {
+				width: 200px;
+				height: 20px;
+				background: green;
+			}
+		</style>
+	</head>
+	<body>
+		<button type="button" class="btn1">开始到500</button>
+		<button type="button" class="btn2">500到200</button>
+		<button type="button" class="btn3">结束</button>
+		<div class="box"></div>
+		<div class="five"></div>
+		<div class="two"></div>
+		<script type="text/javascript">
+			let firstBtn = document.querySelector(".btn1");
+			let secondBtn = document.querySelector(".btn2");
+			let endBtn = document.querySelector(".btn3");
+			let zDiv = document.querySelector(".box");
+			let timerId = null;
+
+			firstBtn.onclick = function() {
+				linearAnimation(zDiv, 500);
+			}
+
+			secondBtn.onclick = function() {
+				linearAnimation(zDiv, 200);
+			}
+			endBtn.onclick = function() {
+				clearInterval(timerId);
+			}
+
+			function slowAnimation(ele, target) {
+				clearInterval(timerId);
+				timerId = setInterval(function() {
+					let begin = parseInt(ele.style.marginLeft) || 0;
+					let step = (target - begin) * 0.3;
+					begin = begin + step;
+					if (Math.abs(Math.floor(target - begin)) < 1) {
+						clearInterval(timerId);
+						begin = target;
+					}
+					ele.style.marginLeft = begin + "px";
+
+				}, 100)
+			}
+		</script>
+	</body>
+</html>

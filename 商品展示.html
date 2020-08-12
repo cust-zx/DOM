@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			div{
+				width: 430px;
+				border: 1px solid #000;
+				box-sizing: border-box;
+				margin: 20px auto;
+			}
+			div>img{
+				width: 430px;
+			}
+			ul{
+				display: flex;
+				justify-content: space-between;
+				list-style: none;
+			}
+			ul>li{
+				border: 2px solid transparent;
+				box-sizing: border-box;
+			}
+			ul img{
+				width: 80px;
+				vertical-align: bottom;
+			}
+			.yangshi{
+				border: 2px solid yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="images/pic1.jpg" class="show">
+			<ul>
+				<li><img src="images/pic1.jpg" ></li>
+				<li><img src="images/pic2.jpg" ></li>
+				<li><img src="images/pic3.jpg" ></li>
+				<li><img src="images/pic4.jpg" ></li>
+				<li><img src="images/pic5.jpg" ></li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript">
+			let sImg = document.querySelector(".show");
+			let cImg = document.querySelectorAll("li>img");
+			for(let item of cImg)
+			{
+				item.onmouseenter = function()
+				{
+					item.parentNode.className = "yangshi";
+					sImg.src = item.src;
+				}
+				item.onmouseleave = function()
+				{
+					item.parentNode.className = "";
+				}
+			}
+		</script>
+	</body>
+</html>

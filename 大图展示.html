@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 400px;
+				height: 400px;
+				margin: 100px;
+				position: relative;
+			}
+
+			.small-box {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 400px;
+				height: 400px;
+				cursor: move;
+			}
+			
+			.small-box>span{
+				width: 200px;
+				height: 200px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: rgba(0,0,0,0.5);
+				display: none;
+			}
+
+			.big-box {
+				position: absolute;
+				top: 0;
+				left: 410px;
+				width: 400px;
+				height: 400px;
+				overflow: hidden;
+				display: none;
+
+			}
+			.big-box>img{
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="small-box">
+				<img src="images/small.jpg">
+				<span></span>
+			</div>
+			<div class="big-box">
+				<img src="images/big.jpg">
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			let oSmallBox = document.querySelector(".small-box");
+			let oBigBox = document.querySelector(".big-box");
+			let oBox = document.querySelector(".box");
+			let oSpan = document.querySelector("span");
+			let oImg = document.querySelector(".big-box>img");
+			
+			oSmallBox.onmouseenter = function()
+			{
+				oBigBox.style.display = "block";
+				oSpan.style.display = "block";
+			}
+			oSmallBox.onmouseleave = function()
+			{
+				oBigBox.style.display = "none";
+				oSpan.style.display = "none";
+			}
+			oSmallBox.onmousemove = function(event)
+			{
+				event = event || window.event;
+				
+				let mouseX = event.pageX - oBox.offsetLeft;
+				let mouseY = event.pageY - oBox.offsetTop;
+				
+				let mouseMaxX = oSmallBox.offsetWidth - oSpan.offsetWidth;
+				let mouseMaxY = oSmallBox.offsetHeight - oSpan.offsetHeight;
+				
+				mouseX = mouseX - oSpan.offsetWidth / 2;
+				mouseY = mouseY - oSpan.offsetHeight / 2;
+				
+				mouseX = mouseX < 0 ? 0 : mouseX;
+				mouseY = mouseY < 0 ? 0 : mouseY;
+				
+				mouseX = mouseX > mouseMaxX ? mouseMaxX : mouseX;
+				mouseY = mouseY > mouseMaxY ? mouseMaxY : mouseY;
+				
+				oSpan.style.left = mouseX + "px";
+				oSpan.style.top = mouseY + "px";
+				
+				let imgMaxX = oBigBox.offsetWidth - oImg.offsetWidth;
+				let imgMaxY = oBigBox.offsetHeight - oImg.offsetHeight;
+				console.log(imgMaxX,imgMaxY)
+				
+				let imgMoveX = mouseX / mouseMaxX * imgMaxX;
+				let imgMoveY = mouseY / mouseMaxY * imgMaxY;
+				
+				oImg.style.left = imgMoveX + "px";
+				oImg.style.top = imgMoveY + "px";
+			}
+		</script>
+	</body>
+</html>

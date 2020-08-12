@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>无限轮播图</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 670px;
+				height: 300px;
+				border: 1px solid #000000;
+				box-sizing: border-box;
+				margin: 20px auto;
+				position: relative;
+				overflow: hidden;
+			}
+
+			ul {
+				list-style: none;
+				display: flex;
+			}
+
+			p {
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+			}
+
+			p>span {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+				text-align: center;
+				color: #FFFFFF;
+				font-size: 15px;
+				font-weight: bold;
+				background: rgba(0, 0, 0, 0.5);
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul>
+				<li><img src="images/ad1.jpg"></li>
+				<li><img src="images/ad2.jpg"></li>
+				<li><img src="images/ad3.jpg"></li>
+				<li><img src="images/ad1.jpg"></li>
+			</ul>
+			<p>
+				<span class="leftBtn">&lt;</span>
+				<span class="rightBtn">&gt;</span>
+			</p>
+		</div>
+		<script type="text/javascript">
+			let leftBtn = document.querySelector(".leftBtn");
+			let rightBtn = document.querySelector(".rightBtn");
+			let zUl = document.querySelector("ul");
+			let zBox = document.querySelector(".box");
+			let items = document.querySelectorAll("li");
+			let currentNum = 0;
+			let timerId = null;
+
+			rightBtn.onclick = function() {
+				currentNum++;
+				let moveLength = parseInt(getComputedStyle(items[0]).width);
+				if (currentNum > items.length - 1) {
+					currentNum = 0;
+					zUl.style.marginLeft = -(moveLength * currentNum) + "px";
+					currentNum++;
+				}
+				// linearAnimation(zUl,-(moveLength * currentNum));
+				slowAnimation(zUl, -(moveLength * currentNum));
+			}
+			leftBtn.onclick = function() {
+				currentNum--;
+				let moveLength = parseInt(getComputedStyle(items[0]).width);
+				if (currentNum < 0) {
+					currentNum = items.length - 1;
+					zUl.style.marginLeft = -(moveLength * currentNum) + "px";
+					currentNum--;
+				}
+				// linearAnimation(zUl,-(moveLength * currentNum));
+				slowAnimation(zUl, -(moveLength * currentNum));
+			}
+
+			let id = setInterval(function() {
+				rightBtn.onclick();
+			}, 2000)
+
+			zBox.onmouseenter = function() {
+				clearInterval(id);
+			}
+
+			zBox.onmouseleave = function() {
+				id = setInterval(function() {
+					rightBtn.onclick();
+				}, 2000)
+			}
+
+
+			function linearAnimation(ele, target) {
+				clearInterval(timerId);
+				timerId = setInterval(function() {
+					let begin = parseInt(ele.style.marginLeft) || 0;
+					let step = (target - begin) > 0 ? 12 : -12;
+					begin = begin + step;
+					if (Math.abs(target - begin) <= Math.abs(step)) {
+						clearInterval(timerId);
+						begin = target;
+					}
+					ele.style.marginLeft = begin + "px";
+
+				}, 100)
+			}
+
+			function slowAnimation(ele, target) {
+				clearInterval(timerId);
+				timerId = setInterval(function() {
+					let begin = parseInt(ele.style.marginLeft) || 0;
+					let step = (target - begin) * 0.3;
+					begin = begin + step;
+					if (Math.abs(Math.floor(target - begin)) < 1) {
+						clearInterval(timerId);
+						begin = target;
+					}
+					ele.style.marginLeft = begin + "px";
+
+				}, 100)
+			}
+		</script>
+	</body>
+</html>

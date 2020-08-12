@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			img:first-child {
+				position: fixed;
+				bottom: 380px;
+				left: 230px;
+			}
+
+			img:last-child {
+				position: fixed;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<img src="images/close.jpg">
+			<img src="images/sina-ad.png">
+		</div>
+		
+		<script type="text/javascript">
+			let zImg = document.querySelector("img:first-child");
+			zImg.onclick = function()
+			{
+				let zDiv = document.querySelector("div");
+				zDiv.parentNode.removeChild(zDiv);
+			}
+		</script>
+	</body>
+</html>

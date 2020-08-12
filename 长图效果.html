@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.box {
+				width: 600px;
+				height: 300px;
+				border: 1px solid #000000;
+				box-sizing: border-box;
+				margin: 10px auto;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.box div {
+				width: 100%;
+				height: 150px;
+				z-index: 999;
+			}
+
+			.box-top {
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+
+			.box-bottom {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+			}
+
+			.box>img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 1563px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="box-top"></div>
+			<div class="box-bottom"></div>
+			<img src="images/long.gif">
+		</div>
+
+		<script type="text/javascript">
+			let hTop = document.querySelector(".box-top");
+			let hBottom = document.querySelector(".box-bottom");
+			let hImg = document.querySelector("img");
+			let hDiv = document.querySelector(".box");
+			let timerId = null;
+			let timer = null;
+
+			let divHeight = parseInt(getComputedStyle(hDiv).height);
+			let imgHeight = parseInt(getComputedStyle(hImg).height);
+			let maxOffsetY = divHeight - imgHeight;
+
+			hTop.onmouseenter = function() {
+				let offsetY = parseInt(hImg.style.top) || 0;
+				timerId = setInterval(function() {
+					if (offsetY < maxOffsetY) {
+						clearInterval(timerId);
+						return;
+					}
+					offsetY = offsetY - 10;
+					hImg.style.top = offsetY + "px";
+
+				}, 20)
+			}
+			hTop.onmouseleave = function() {
+				clearInterval(timerId);
+			}
+
+			hBottom.onmouseenter = function() {
+				let offsetY = parseInt(hImg.style.top);
+				timer = setInterval(function() {
+					if (offsetY >= 0) {
+						clearInterval(timer);
+						return;
+					}
+					offsetY = offsetY + 10;
+					hImg.style.top = offsetY + "px";
+
+				}, 20)
+
+			}
+			hBottom.onmouseleave = function() {
+				clearInterval(timer);
+			}
+		</script>
+	</body>
+</html>

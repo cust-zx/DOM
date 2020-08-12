@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			p {
+				width: 100%;
+				height: 30px;
+				text-align: center;
+				background: red;
+				line-height: 30px;
+				color: white;
+			}
+
+			.mask {
+				background: rgba(0, 0, 0, 0.5);
+				width: 100%;
+				height: 100%;
+				position: fixed;
+				left: 0;
+				top: 0;
+				display: none;
+			}
+
+			.move {
+				background: yellow;
+				width: 300px;
+				height: 300px;
+				position: relative;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				cursor: move;
+			}
+
+			span {
+				position: absolute;
+				width: 40px;
+				height: 40px;
+				background: blueviolet;
+				position: absolute;
+				top: 0;
+				right: 0;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<p>登录</p>
+		<a href="http://it666.com">it666</a>
+		<div class="mask">
+			<div class="move">
+				<span></span>
+			</div>
+		</div>
+		<script type="text/javascript">
+			let oP = document.querySelector("p");
+			let oMask = document.querySelector(".mask");
+			let oMove = document.querySelector(".move");
+			let oSpan = document.querySelector("span");
+
+			oP.onclick = function() {
+				oMask.style.display = "block";
+			}
+			oMove.onmousedown = function(event) {
+				event = event || window.event;
+				let x = event.pageX - oMove.offsetLeft;
+				let y = event.pageY - oMove.offsetTop;
+				oMove.onmousemove = function(event) {
+					event = event || window.event;
+					let offX = event.pageX - x;
+					let offY = event.pageY - y;
+					oMove.style.left = offX + "px";
+					oMove.style.top = offY + "px";
+				}
+			}
+			oMove.onmouseup = function()
+			{
+				oMove.onmousemove = null;
+			}
+			oSpan.onclick = function() {
+				oMask.style.display = "none";
+			}
+		</script>
+	</body>
+</html>

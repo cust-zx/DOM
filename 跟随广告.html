@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			div {
+				width: 100%;
+				height: auto;
+				text-align: center;
+			}
+
+			img {
+				position: absolute;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<img src="images/left_ad.png">
+		<div>
+			<p>我是正文1</p>
+			<p>我是正文2</p>
+			<p>我是正文3</p>
+			<p>我是正文4</p>
+			<p>我是正文5</p>
+			<p>我是正文6</p>
+			<p>我是正文7</p>
+			<p>我是正文8</p>
+			<p>我是正文9</p>
+			<p>我是正文10</p>
+			<p>我是正文11</p>
+			<p>我是正文12</p>
+			<p>我是正文13</p>
+			<p>我是正文14</p>
+			<p>我是正文15</p>
+			<p>我是正文16</p>
+			<p>我是正文17</p>
+			<p>我是正文18</p>
+			<p>我是正文19</p>
+			<p>我是正文20</p>
+			<p>我是正文21</p>
+			<p>我是正文22</p>
+			<p>我是正文23</p>
+			<p>我是正文24</p>
+			<p>我是正文25</p>
+			<p>我是正文26</p>
+			<p>我是正文27</p>
+			<p>我是正文28</p>
+			<p>我是正文29</p>
+			<p>我是正文30</p>
+			<p>我是正文31</p>
+			<p>我是正文32</p>
+			<p>我是正文33</p>
+			<p>我是正文34</p>
+			<p>我是正文35</p>
+			<p>我是正文36</p>
+			<p>我是正文37</p>
+			<p>我是正文38</p>
+			<p>我是正文39</p>
+			<p>我是正文40</p>
+			<p>我是正文41</p>
+			<p>我是正文42</p>
+			<p>我是正文43</p>
+			<p>我是正文44</p>
+			<p>我是正文45</p>
+			<p>我是正文46</p>
+			<p>我是正文47</p>
+			<p>我是正文48</p>
+			<p>我是正文49</p>
+			<p>我是正文50</p>
+		</div>
+		<script src="animation2.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let oImg = document.querySelector("img");
+
+			let {screenWidth,screenHeight} = getScreen();
+
+			let imgHeight = oImg.offsetHeight;			
+
+			let zTop = (screenHeight - imgHeight) / 2;
+			easeAnimation(oImg, {"top": zTop})
+
+			window.onscroll = function() {
+				let {x,y} = getScroll();
+				let lastTop = zTop + y;
+
+				easeAnimation(oImg, {"top": lastTop})
+			}
+
+
+
+
+
+
+			// 获取网页宽高
+			function getScreen() {
+				let width, height;
+				if (window.innerWidth) {
+					width = window.innerWidth;
+					height = window.innerHeight;
+				} else if (document.compatMode === "BackCompat") {
+					width = document.body.clientWidth;
+					height = document.body.clientHeight;
+				} else {
+					width = document.documentElement.clientWidth;
+					height = document.documentElement.clientHeight;
+				}
+				return {
+					screenWidth: width,
+					screenHeight: height
+				}
+			}
+			// 获取元素宽高
+			function getEle(obj, name) {
+				if (obj.currentStyle) {
+					return obj.currentStyle[name];
+				} else {
+					return getComputedStyle(obj)[name];
+				}
+			}
+
+			// 获取网页的滚动距离
+			function getScroll() {
+				let x, y;
+				if (window.pageXOffset) {
+					x = window.pageXOffset;
+					y = window.pageYOffset;
+				} else if (document.compatMode === "BackCompat") {
+					x = document.body.scrollLeft;
+					y = document.body.scrollTop;
+				} else {
+					x = document.documentElement.scrollLeft;
+					y = document.documentElement.scrollTop;
+				}
+				return {
+					x: x,
+					y: y
+				}
+			}
+		</script>
+	</body>
+</html>

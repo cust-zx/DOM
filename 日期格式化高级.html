@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			let crtTime = new Date();
+			let res = dateFormart("yyyy-MM-dd hh:mm:ss", crtTime);
+			let res1 = dateFormart("yyyy-MM-dd", crtTime);
+			let res2 = dateFormart("hh:mm:ss", crtTime);
+			console.log(res)
+			console.log(res1)
+			console.log(res2)
+
+			function dateFormart(fmt, date) {
+				let reg = /y+/;
+				let yearStr = fmt.match(reg);
+				if (yearStr) {
+					yearStr = yearStr[0];
+					let yearNum = date.getFullYear() + "";
+					yearNum = yearNum.substr(4 - yearStr.length);
+					fmt = fmt.replace(yearStr, yearNum);
+				}
+
+
+				let obj = {
+					"M+": date.getMonth() + 1,
+					"d+": date.getDate(),
+					"h+": date.getHours(),
+					"m+": date.getMinutes(),
+					"s+": date.getSeconds()
+				}
+				for (let key in obj) {
+					let reg = new RegExp(key);
+					let dateStr = fmt.match(reg);
+					if (dateStr) {
+						dateStr = dateStr[0];
+						if (dateStr.length === 1) {
+							fmt = fmt.replace(dateStr, obj[key]);
+						} else {
+							let dateNum = "00" + obj[key];
+							dateNum = dateNum.substr((obj[key] + "").length);
+							fmt = fmt.replace(dateStr, dateNum);
+						}
+					}
+
+				}
+				return fmt;
+			}
+		</script>
+	</body>
+</html>

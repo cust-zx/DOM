@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			.music {
+				width: 300px;
+				padding: 20px;
+				border: 1px solid #000000;
+				box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+				box-sizing: border-box;
+				margin: 50px auto;
+				position: relative;
+			}
+
+			h3 {
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				border-bottom: 1px solid #c3c3c3;
+			}
+			ul{
+				list-style: none;
+			}
+			ul>li{
+				height: 30px;
+				line-height: 30px;
+				border-bottom: 1px solid #c3c3c3;
+			}
+			.btnDiv{
+				text-align: right;
+				margin-top: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="music">
+			<h3>歌曲排行榜</h3>
+			<ul>
+				<li><input type="checkbox" /><label>醒着做梦</label></li>
+				<li><input type="checkbox" /><label>男人不应该让女人流泪</label></li>
+				<li><input type="checkbox" /><label>女人不应该让男人太累</label></li>
+				<li><input type="checkbox" /><label>狂浪</label></li>
+				<li><input type="checkbox" /><label>生僻字</label></li>
+				<li><input type="checkbox" /><label>沙漠骆驼</label></li>
+				<li><input type="checkbox" /><label>最美的期待</label></li>
+				<li><input type="checkbox" /><label>光年之外</label></li>
+			</ul>
+			<div class="btnDiv">
+				<button type="button" id="all_selected">全选</button>
+				<button type="button" id="cancel_selected">取消选择</button>
+				<button type="button" id="reverse_selected">反选</button>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			let allBtn = document.querySelector("#all_selected");
+			let canBtn = document.querySelector("#cancel_selected");
+			let revBtn = document.querySelector("#reverse_selected");
+			let items = document.querySelectorAll("input");
+			
+				allBtn.onclick = function()
+				{
+					for(let item of items)
+					{
+						item.checked = true;
+					}
+				}
+				canBtn.onclick = function()
+				{
+					for(let item of items)
+					{
+						item.checked = false;
+					}
+				}
+				
+				revBtn.onclick = function()
+				{
+					for(let item of items)
+					{
+						item.checked = !item.checked;
+					}
+				}
+		</script>
+	</body>
+</html>

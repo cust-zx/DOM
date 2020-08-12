@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="http://www.it666.com">
+			<input type="text" placeholder="请输入账号" name="zx1"/>
+			<input type="password" placeholder="请输入密码" name="zx2"/>
+			<input type="submit" value="注册" />
+		</form>
+	</body>
+	<script type="text/javascript">
+		let input1 = document.querySelector("input[type=text]");
+		let input2 = document.querySelector("input[type=password]");
+		let input3 = document.querySelector("input[type=submit]");
+		input3.onclick = function() {
+			
+			if (input1.value.length < 6) {
+				input1.style.background = "red";
+				return false;
+			} else {
+				input1.style.background = "#fff";
+			}
+			if (input2.value.length < 6) {
+				input2.style.background = "red";
+				return false;
+			} else {
+				input2.style.background = "#fff";
+			}
+		}
+	</script>
+</html>
